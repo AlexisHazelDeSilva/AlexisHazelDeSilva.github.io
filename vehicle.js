@@ -93,32 +93,32 @@ function Vehicle(x,y){
         newVehicle.dna = this.dna;
         
         if(random() < 0.03){
-            this.dna[0] += random();
+            newVehicle.dna[0] += random();
         }
         if(random() < 0.03){
-            this.dna[1] += random();
+            newVehicle.dna[1] += random();
         }
         if(random() < 0.03){
-            this.dna[2] += random(-5,5);
-            if(this.dna[2] < this.MIN_PERCEPT){
-                this.dna[2] = this.MIN_PERCEPT;
+            newVehicle.dna[2] += random(-5,5);
+            if(newVehicle.dna[2] < this.MIN_PERCEPT){
+                newVehicle.dna[2] = this.MIN_PERCEPT;
             }
             else if(this.dna[2] > this.MAX_PERCEPT){
-                this.dna[2] = this.MAX_PERCEPT;
+                newVehicle.dna[2] = this.MAX_PERCEPT;
             }
         }
         if(random() < 0.03){
-            this.dna[3] += random(-5,5);
-            if(this.dna[3] < this.MIN_PERCEPT){
-                this.dna[3] = this.MIN_PERCEPT;
+            newVehicle.dna[3] += random(-5,5);
+            if(newVehicle.dna[3] < this.MIN_PERCEPT){
+                newVehicle.dna[3] = this.MIN_PERCEPT;
             }
-            else if(this.dna[3] > this.MAX_PERCEPT){
-                this.dna[3] = this.MAX_PERCEPT;
+            else if(newVehicle.dna[3] > this.MAX_PERCEPT){
+                newVehicle.dna[3] = this.MAX_PERCEPT;
             }
         }
         if(random() < 0.03){
-            this.dna[4] += random()/10;
-            this.dna[5] = -1*this.dna[4];
+            newVehicle.dna[4] += random()/10;
+            newVehicle.dna[5] = -1*newVehicle.dna[4];
         }
         
         return newVehicle;
