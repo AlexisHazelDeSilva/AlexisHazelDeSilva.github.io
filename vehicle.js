@@ -103,7 +103,7 @@ function Vehicle(x,y){
             if(this.dna[2] < this.MIN_PERCEPT){
                 this.dna[2] = this.MIN_PERCEPT;
             }
-            else if(this.dna[2] < this.MAX_PERCEPT){
+            else if(this.dna[2] > this.MAX_PERCEPT){
                 this.dna[2] = this.MAX_PERCEPT;
             }
         }
