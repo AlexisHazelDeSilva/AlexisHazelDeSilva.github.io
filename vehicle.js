@@ -90,7 +90,12 @@ function Vehicle(x,y){
     
     this.clone = function(){
         var newVehicle = new Vehicle(this.position.x,this.position.y);
-        newVehicle.dna = this.dna;
+        newVehicle.dna[0] = this.dna[0];
+        newVehicle.dna[1] = this.dna[1];
+        newVehicle.dna[2] = this.dna[2];
+        newVehicle.dna[3] = this.dna[3];
+        newVehicle.dna[4] = this.dna[4];
+        newVehicle.dna[5] = this.dna[5];
         
         if(random() < 0.03){
             newVehicle.dna[0] += random();
