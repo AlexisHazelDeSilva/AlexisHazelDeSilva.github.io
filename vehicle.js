@@ -3,10 +3,14 @@ function Vehicle(x,y){
     this.MIN_PERCEPT = 5;
     this.MAX_PERCEPT = 100;
     
-    this.size = 5;
+    this.distance = 0;
+    
+    this.size = 7.5;
     this.maxSpeed = 5;
     this.turnForce = 0.2;
     this.health = 1;
+    
+    this.generation = 1;
     
     this.acceleration = createVector(0,0);
     this.velocity = createVector(0,0);
@@ -20,8 +24,15 @@ function Vehicle(x,y){
     this.dna[4] = random();//Plant Nutrition
     this.dna[5] = -1*this.dna[4];//Meat Nutrition
     
-    this.cloneDNA = function(){
-        return [this.dna[0],this.dna[1],this.dna[2],this.dna[3],this.dna[4],this.dna[5]];
+    //COLOR
+    
+    this.dna[6] = random(0,255);
+    this.dna[7] = random(0,255);
+    this.dna[8] = random(0,255);
+    
+    this.findDist = function(){
+        
+        this.distance = sqrt(pow(this.position.x - mouseX,2)+pow(this.position.y - mouseY,2));
     }
     
     this.update = function(){
@@ -32,6 +43,8 @@ function Vehicle(x,y){
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
+        
+        this.findDist();
     }
     
     this.applyForce = function(force){
@@ -94,41 +107,58 @@ function Vehicle(x,y){
     
     this.clone = function(){
         var newVehicle = new Vehicle(this.position.x,this.position.y);
-        newVehicle.dna = this.cloneDNA();
+        
+        newVehicle.generation = this.generation + 1;
+        
+        for(i = 0; i < this.dna.length; i++){
+            newVehicle.dna[i] = this.dna[i];
+        }
         
         if(random() < 0.03){
-            newVehicle.dna[0] += random();
+            this.dna[0] += random();
         }
         if(random() < 0.03){
-            newVehicle.dna[1] += random();
+            this.dna[1] += random();
         }
         if(random() < 0.03){
-            newVehicle.dna[2] += random(-5,5);
-            if(newVehicle.dna[2] < this.MIN_PERCEPT){
-                newVehicle.dna[2] = this.MIN_PERCEPT;
+            this.dna[2] += random(-5,5);
+            if(this.dna[2] < this.MIN_PERCEPT){
+                this.dna[2] = this.MIN_PERCEPT;
             }
-            else if(this.dna[2] > this.MAX_PERCEPT){
-                newVehicle.dna[2] = this.MAX_PERCEPT;
-            }
-        }
-        if(random() < 0.03){
-            newVehicle.dna[3] += random(-5,5);
-            if(newVehicle.dna[3] < this.MIN_PERCEPT){
-                newVehicle.dna[3] = this.MIN_PERCEPT;
-            }
-            else if(newVehicle.dna[3] > this.MAX_PERCEPT){
-                newVehicle.dna[3] = this.MAX_PERCEPT;
+            else if(this.dna[2] < this.MAX_PERCEPT){
+                this.dna[2] = this.MAX_PERCEPT;
             }
         }
         if(random() < 0.03){
-            newVehicle.dna[4] += random()/10;
-            newVehicle.dna[5] = -1*newVehicle.dna[4];
+            this.dna[3] += random(-5,5);
+            if(this.dna[3] < this.MIN_PERCEPT){
+                this.dna[3] = this.MIN_PERCEPT;
+            }
+            else if(this.dna[3] < this.MAX_PERCEPT){
+                this.dna[3] = this.MAX_PERCEPT;
+            }
+        }
+        if(random() < 0.03){
+            this.dna[4] += random()/10;
+            this.dna[5] = -1*this.dna[4];
+        }
+        
+        for(i = 6; i < 9; i++){
+            if(random() < 0.03){
+                this.dna[i] += random(-10,10);
+                
+                if(this.dna[i] < 0)
+                    this.dna[i] = 0;
+                if(this.dna[i] > 255)
+                    this.dna[i] = 255;
+                
+            }
         }
         
         return newVehicle;
     }
     
-    this.display = function(){
+    this.display = function(debug){
         
         var angle = this.velocity.heading() + PI/2;
         
@@ -141,7 +171,8 @@ function Vehicle(x,y){
         var col = lerpColor(red,green,this.health);
         var colNut = lerpColor(red,green,this.dna[4]);
         
-        fill(col);
+        //fill(col);
+        fill(this.dna[6],this.dna[7],this.dna[8]);
         
         beginShape();
         vertex(0,-this.size*2);
@@ -154,23 +185,27 @@ function Vehicle(x,y){
         
         endShape(CLOSE);
         
-        stroke(colNut);
-        strokeWeight(3);
-        line(-10,0,-10,-this.dna[4]*10);
-        
-        stroke(0,255,0);
-        strokeWeight(2);
-        line(0,0,0,-this.dna[0]*10);
-        stroke(255,0,0);
-        strokeWeight(1);
-        line(0,0,0,-this.dna[1]*10);
-        
-        noFill();
-        
-        stroke(0,255,0);
-        ellipse(0,0,this.dna[2],this.dna[2]);
-        stroke(255,0,0);
-        ellipse(0,0,this.dna[3],this.dna[3]);
+        //DEBUG
+        if(debug == true){
+            stroke(colNut);
+            strokeWeight(3);
+            line(-10,0,-10,-this.dna[4]*10);
+
+            stroke(0,255,0);
+            strokeWeight(2);
+            line(0,0,0,-this.dna[0]*10);
+            stroke(255,0,0);
+            strokeWeight(1);
+            line(0,0,0,-this.dna[1]*10);
+
+            noFill();
+
+            stroke(0,255,0);
+            ellipse(0,0,this.dna[2],this.dna[2]);
+            stroke(255,0,0);
+            ellipse(0,0,this.dna[3],this.dna[3]);
+        }
+        //END DEBUG
         
         pop();
         
