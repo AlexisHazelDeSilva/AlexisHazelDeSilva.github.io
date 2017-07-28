@@ -106,6 +106,8 @@ function Vehicle(x,y){
     }
     
     this.clone = function(){
+        mutated = false;
+        
         var newVehicle = new Vehicle(this.position.x,this.position.y);
         
         newVehicle.generation = this.generation + 1;
@@ -115,12 +117,15 @@ function Vehicle(x,y){
         }
         
         if(random() < 0.03){
+            mutated = true;
             this.dna[0] += random();
         }
         if(random() < 0.03){
+            mutated = true;
             this.dna[1] += random();
         }
         if(random() < 0.03){
+            mutated = true;
             this.dna[2] += random(-5,5);
             if(this.dna[2] < this.MIN_PERCEPT){
                 this.dna[2] = this.MIN_PERCEPT;
@@ -130,6 +135,7 @@ function Vehicle(x,y){
             }
         }
         if(random() < 0.03){
+            mutated = true;
             this.dna[3] += random(-5,5);
             if(this.dna[3] < this.MIN_PERCEPT){
                 this.dna[3] = this.MIN_PERCEPT;
@@ -139,20 +145,15 @@ function Vehicle(x,y){
             }
         }
         if(random() < 0.03){
+            mutated = true;
             this.dna[4] += random()/10;
             this.dna[5] = -1*this.dna[4];
         }
         
-        for(i = 6; i < 9; i++){
-            if(random() < 0.03){
-                this.dna[i] += random(-10,10);
-                
-                if(this.dna[i] < 0)
-                    this.dna[i] = 0;
-                if(this.dna[i] > 255)
-                    this.dna[i] = 255;
-                
-            }
+        if(mutated == true){
+            this.dna[6] = random(0,255);
+            this.dna[7] = random(0,255);
+            this.dna[8] = random(0,255);
         }
         
         return newVehicle;
