@@ -7,7 +7,7 @@ function Vehicle(x,y){
     
     this.size = 7.5;
     this.maxSpeed = 5;
-    this.turnForce = 0.2;
+    this.turnForce = 0.125;
     this.health = 1;
     
     this.generation = 1;
@@ -118,11 +118,26 @@ function Vehicle(x,y){
         
         if(random() < 0.03){
             mutated = true;
-            this.dna[0] += random();
+            this.dna[0] += random(-1,1);
+            
+            if(this.dna[0] < -10){
+                this.dna[0] = -10;
+            }
+            else if (this.dna[0] > 10){
+                this.dna[0] = 10;
+            }
+            
         }
         if(random() < 0.03){
             mutated = true;
-            this.dna[1] += random();
+            this.dna[1] += random(-1,1);
+            
+            if(this.dna[1] < -10){
+                this.dna[1] = -10;
+            }
+            else if (this.dna[1] > 10){
+                this.dna[1] = 10;
+            }
         }
         if(random() < 0.03){
             mutated = true;
