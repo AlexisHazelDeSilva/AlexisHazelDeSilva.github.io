@@ -147,6 +147,13 @@ function Vehicle(x,y){
         if(random() < 0.03){
             mutated = true;
             this.dna[4] += random()/10;
+            
+            if(this.dna[4] < 0){
+                this.dna[4] = 0;
+            }else if(this.dna[4] > 1){
+                this.dna[4] = 1;
+            }
+            
             this.dna[5] = -1*this.dna[4];
         }
         
