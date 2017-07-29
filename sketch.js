@@ -61,6 +61,7 @@ function draw() {
     stroke(128,128,0);
     strokeWeight(0.5);
     text("Get Well Bobbie!",600,350);
+    textAlign(LEFT,CENTER);
     
     textSize(10);
     
