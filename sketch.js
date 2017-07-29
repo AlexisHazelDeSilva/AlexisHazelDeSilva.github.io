@@ -55,6 +55,15 @@ function setup() {
 function draw() {
     background(0,0,64);
     
+    textSize(60);
+    textAlign(CENTER,CENTER);
+    fill(100,100,0);
+    stroke(128,128,0);
+    strokeWeight(0.5);
+    text("Get Well Bobbie!",600,350);
+    
+    textSize(10);
+    
     if(!paused){
 
         if(random(1) < 0.2 && food.length < MAX_FOOD){
