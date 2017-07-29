@@ -100,6 +100,7 @@ function draw() {
             }
 
             if(vehicles[i].dead()){
+                food.push(createVector(vehicles[i].position.x,vehicles[i].position.y));
                 vehicles.splice(i,1);
             }
 
