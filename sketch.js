@@ -161,14 +161,15 @@ function draw() {
         fill(255);
         stroke(0);
 
-        text("Closest Vehicle Dist: "+closeVeh.distance,0,10);
-        text("Plant Weight: "+closeVeh.dna[0],0,25);
-        text("Meat Weight: "+closeVeh.dna[1],0,40);
-        text("Plant Perception: "+closeVeh.dna[2],0,55);
-        text("Meat Perception: "+closeVeh.dna[3],0,70);
-        text("Nutrition: "+closeVeh.dna[4],0,85);
-        text("Generation: "+closeVeh.generation,0,100);
-        text("Color: "+int(closeVeh.dna[6])+","+int(closeVeh.dna[7])+","+int(closeVeh.dna[8]),0,130);
+        text("Food on Death: "+foodondeath,0,10);
+        text("Closest Vehicle Dist: "+closeVeh.distance,0,25);
+        text("Plant Weight: "+closeVeh.dna[0],0,40);
+        text("Meat Weight: "+closeVeh.dna[1],0,55);
+        text("Plant Perception: "+closeVeh.dna[2],0,70);
+        text("Meat Perception: "+closeVeh.dna[3],0,85);
+        text("Nutrition: "+closeVeh.dna[4],0,100);
+        text("Generation: "+closeVeh.generation,0,115);
+        text("Color: "+int(closeVeh.dna[6])+","+int(closeVeh.dna[7])+","+int(closeVeh.dna[8]),0,145);
     }
     
 }
