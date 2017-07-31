@@ -121,7 +121,7 @@ function Vehicle(x,y){
         mutation = -1;
         
         if(random() < this.MUTATION_RATE){
-            mutation = int(random(0,4));
+            mutation = int(random(0,5));
         }
         
         if(mutation == 0){
