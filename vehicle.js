@@ -1,5 +1,7 @@
 function Vehicle(x,y){
 
+    this.MUTATION_RATE = 0.05;
+    
     this.MIN_PERCEPT = 5;
     this.MAX_PERCEPT = 100;
     
@@ -7,7 +9,7 @@ function Vehicle(x,y){
     
     this.size = 7.5;
     this.maxSpeed = 5;
-    this.turnForce = 0.125;
+    this.turnForce = 0.25;
     this.health = 1;
     
     this.generation = 1;
@@ -116,7 +118,13 @@ function Vehicle(x,y){
             newVehicle.dna[i] = this.dna[i];
         }
         
-        if(random() < 0.03){
+        mutation = -1;
+        
+        if(random() < this.MUTATION_RATE){
+            mutation = int(random(0,4));
+        }
+        
+        if(mutation == 0){
             mutated = true;
             this.dna[0] += random(-1,1);
             
@@ -128,7 +136,7 @@ function Vehicle(x,y){
             }
             
         }
-        if(random() < 0.03){
+        if(mutation == 1){
             mutated = true;
             this.dna[1] += random(-1,1);
             
@@ -139,7 +147,7 @@ function Vehicle(x,y){
                 this.dna[1] = 10;
             }
         }
-        if(random() < 0.03){
+        if(mutation == 2){
             mutated = true;
             this.dna[2] += random(-5,5);
             if(this.dna[2] < this.MIN_PERCEPT){
@@ -149,7 +157,7 @@ function Vehicle(x,y){
                 this.dna[2] = this.MAX_PERCEPT;
             }
         }
-        if(random() < 0.03){
+        if(mutation == 3){
             mutated = true;
             this.dna[3] += random(-5,5);
             if(this.dna[3] < this.MIN_PERCEPT){
@@ -159,7 +167,7 @@ function Vehicle(x,y){
                 this.dna[3] = this.MAX_PERCEPT;
             }
         }
-        if(random() < 0.03){
+        if(mutation == 4){
             mutated = true;
             this.dna[4] += random()/10;
             
