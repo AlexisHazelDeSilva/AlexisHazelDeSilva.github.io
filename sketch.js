@@ -1,10 +1,12 @@
 
 var VEHICLE_COUNT = 20;
-var FOOD_COUNT = 120;
+var FOOD_COUNT = 80;
 var POISON_COUNT = 40;
 
 var MAX_FOOD = 250;
 var MAX_POISON = 100;
+
+var foodondeath = true;
 
 var vehicles = [];
 var food = [];
@@ -20,6 +22,9 @@ function keyTyped(){
     }
     if(key === 'd' ){
         debug = !debug;
+    }
+    if(key === 'f' ){
+        foodondeath = !foodondeath;
     }
 }
 
@@ -100,7 +105,9 @@ function draw() {
             }
 
             if(vehicles[i].dead()){
-                food.push(createVector(vehicles[i].position.x,vehicles[i].position.y));
+                if(foodondeath == true){
+                    food.push(createVector(vehicles[i].position.x,vehicles[i].position.y));
+                }
                 vehicles.splice(i,1);
             }
 
